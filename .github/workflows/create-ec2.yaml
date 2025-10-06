@@ -11,5 +11,12 @@ jobs:
         run: hashicorp/setup-terraform@v3
       - name: run Terraform init
         run: terraform init
+      - name: Configure AWS credentials
+        uses: aws-actions/Configure-aws-credentials@v4
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
       - name: run Terraform plan
         run: terraform plan
+      - name: run Terraform apply
+        run: terraform apply -auto-approve
